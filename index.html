@@ -167,7 +167,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/IMG_0906.JPG" alt="IMG_0906"></p>
+        <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/work-hard.JPG" alt="work-hard"></p>
 <p>早就有想写博客的想法。<br>但总是觉得自己的能力不足，所以迟迟没有动手。<br>毕业工作，想法也有了改变。<br>写博客更多是对生活的一种记录、总结。<br>无论何等微不足道的举动．只要日日坚持．从中总会产生出某些类似观念的东西来。</p>
 
       
@@ -291,6 +291,27 @@
 <li>ppoffice/hexo-theme-icarus</li>
 </ul>
 <p>挑选自己喜欢的一款。当然，自己能够DIY也是极好的。</p>
+<h4 id="四、发布新文章"><a href="#四、发布新文章" class="headerlink" title="四、发布新文章"></a>四、发布新文章</h4><p>执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new post &apos;文章标题&apos;</div></pre></td></tr></table></figure>
+<p>这样会在本地博客的source-&gt;_posts路径下看到新建的文章，是md格式的，找一个markdown文本编辑器进行编辑即可。</p>
+<p>编辑完成之后，与上面一样，执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p>即可更新到Github上。</p>
+<h4 id="五、绑定个人域名"><a href="#五、绑定个人域名" class="headerlink" title="五、绑定个人域名"></a>五、绑定个人域名</h4><p>如果你想拥有一个炫酷的域名，那就往下看吧</p>
+<p>（1）购买域名<br>可以去<a href="https://wanwang.aliyun.com/" target="_blank" rel="external">万网</a>买，也可以去其它地方。具体购买过程就不多讲了。</p>
+<p>（2）配置DNS地址<br>这里以万网为例。<br>进入万网的管理控制台进行修改，修改DNS为DNSPod的免费DNS地址：f1g1ns1.dnspod.net 和 f1g1ns2.dnspod.net</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/dns-config.png" alt="DNS配置"></p>
+<p>(3)域名解析<br>注册一个<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>账号，登录之后把我们新注册的域名加进去，在域名解析界面添加3条记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@          A             192.30.252.153</div><div class="line">@          A             192.30.252.154</div><div class="line">www      CNAME    username.github.io.</div></pre></td></tr></table></figure>
+<p>如图所示。<br><img src="http://oszbsqby8.bkt.clouddn.com/blog/domainname-resolution.png" alt=""></p>
+<p>(4)添加CNAME文件<br>新建一个名为CNAME的文件，无后缀，内容为你的域名地址。<br>将该文件放入本地博客的source文件夹里面，并更新到Github。</p>
+<p>到这里就绑定域名成功了。</p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ul>
+<li><a href="http://www.jianshu.com/p/2cfa48c9c5eb" target="_blank" rel="external">http://www.jianshu.com/p/2cfa48c9c5eb</a></li>
+<li><a href="http://www.jianshu.com/p/fb0b0258362f" target="_blank" rel="external">http://www.jianshu.com/p/fb0b0258362f</a></li>
+<li><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></li>
+<li><a href="http://crazymilk.github.io/2015/12/28/GitHub-Pages-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2" target="_blank" rel="external">http://crazymilk.github.io/2015/12/28/GitHub-Pages-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2</a></li>
+</ul>
 
       
 
