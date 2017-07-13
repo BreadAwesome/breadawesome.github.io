@@ -17,7 +17,7 @@
 <meta property="og:description" content="一、前言Hexo是一个快速、简洁且高效的博客框架，最近有搭建个人博客的想法，便动手尝试了。 二、初始化1.安装Node.js去Node.js官网下载相应的安装包，一路安装即可。 2.安装GitMac下安装Xcode就自带Git。 3.注册Github账号并新建仓库注册过程就不多说了，注册完成之后需要新建一个仓库。需要注意的是新创建的仓库的名字，必须是username.github.io。例如我的u">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/dns-config.png">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/domainname-resolution.png">
-<meta property="og:updated_time" content="2017-07-13T06:07:05.000Z">
+<meta property="og:updated_time" content="2017-07-13T06:34:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下使用Hexo+Github搭建个人博客">
 <meta name="twitter:description" content="一、前言Hexo是一个快速、简洁且高效的博客框架，最近有搭建个人博客的想法，便动手尝试了。 二、初始化1.安装Node.js去Node.js官网下载相应的安装包，一路安装即可。 2.安装GitMac下安装Xcode就自带Git。 3.注册Github账号并新建仓库注册过程就不多说了，注册完成之后需要新建一个仓库。需要注意的是新创建的仓库的名字，必须是username.github.io。例如我的u">
@@ -233,7 +233,7 @@
 <p>（2）配置DNS地址<br>这里以万网为例。<br>进入万网的管理控制台进行修改，修改DNS为DNSPod的免费DNS地址：f1g1ns1.dnspod.net 和 f1g1ns2.dnspod.net</p>
 <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/dns-config.png" alt="DNS配置"></p>
 <p>(3)域名解析<br>注册一个<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPod</a>账号，登录之后把我们新注册的域名加进去，在域名解析界面添加3条记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@          A             192.30.252.153</div><div class="line">@          A             192.30.252.154</div><div class="line">www      CNAME      username.github.io.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@          A             192.30.252.153</div><div class="line">@          A             192.30.252.154</div><div class="line">www      CNAME         username.github.io.</div></pre></td></tr></table></figure>
 <p>如图所示。<br><img src="http://oszbsqby8.bkt.clouddn.com/blog/domainname-resolution.png" alt=""></p>
 <p>(4)添加CNAME文件<br>新建一个名为CNAME的文件，无后缀，内容为你的域名地址。<br>将该文件放入本地博客的source文件夹里面，并更新到Github。</p>
 <p>到这里就绑定域名成功了。</p>
