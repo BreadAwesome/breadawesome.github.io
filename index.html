@@ -147,6 +147,168 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CI" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/14/CI/">iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/14/CI/" class="archive-article-date">
+  	<time datetime="2017-07-14T08:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在项目测试阶段，频繁的打包发布会耗费团队很多的时间。搭建一个自动化打包发布的平台，可以将我们从那些繁琐的打包发布流程中解放出来。</p>
+<p>本文采用的方案是：Jenkins + Fastlane + GitLab + 蒲公英。</p>
+<h4 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h4><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。</p>
+<p>安装过程如下：<br>1.检查Ruby版本，需要2.0及以上版本。在终端输入以下命令确认：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -v</div></pre></td></tr></table></figure>
+<p>需要注意的是需要将gem的source改为<a href="https://gems.ruby-china.org/。" target="_blank" rel="external">https://gems.ruby-china.org/。</a><br>如何检查?在终端输入以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem sources</div></pre></td></tr></table></figure>
+<p>结果应为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">https://gems.ruby-china.org/</div></pre></td></tr></table></figure>
+<p>2.检查Xcode命令行工具是否安装。在终端输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
+<p>如果没有安装会进行安装。如果已经安装了则会提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcode-select: error: command line tools are already installed, use &quot;Software Update&quot; to install updates</div></pre></td></tr></table></figure>
+<p>3.安装Fastlane</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install fastlane --verbose</div></pre></td></tr></table></figure>
+<p>如果出现以下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR:  While executing gem ... (Errno::EPERM)</div><div class="line">    Operation not permitted - /usr/bin/rougify</div></pre></td></tr></table></figure>
+<p>则输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install -n /usr/local/bin fastlane</div></pre></td></tr></table></figure>
+<p>4.检查Fastlane是否正确安装。输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fastlane --version</div></pre></td></tr></table></figure>
+<p>可以看到Fastlane版本信息，我的是2.46.1。</p>
+<h4 id="蒲公英的Fastlane插件安装"><a href="#蒲公英的Fastlane插件安装" class="headerlink" title="蒲公英的Fastlane插件安装"></a>蒲公英的Fastlane插件安装</h4><p>打开终端，进入你的项目工程的根目录，输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fastlane add_plugin pgyer</div></pre></td></tr></table></figure>
+<p>出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;fastlane-plugin-pgyer&apos; was added to &apos;./fastlane/Pluginfile&apos;</div><div class="line">It looks like fastlane plugins are not yet set up for this project.</div><div class="line">fastlane will create a new Gemfile at path &apos;Gemfile&apos;</div><div class="line">This change is necessary for fastlane plugins to work</div><div class="line">Should fastlane modify the Gemfile at path &apos;Gemfile&apos; for you?</div><div class="line">(y/n)</div></pre></td></tr></table></figure>
+<p>输入y按回车，出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Installing plugin dependencies...</div><div class="line">Successfully installed plugins</div></pre></td></tr></table></figure>
+<p>便是安装成功了。</p>
+<h4 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h4><p>1.打开终端，进入你的项目工程的根目录，输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fastlane init</div></pre></td></tr></table></figure>
+<p>中间会让你输入苹果开发者账号的账号和密码，之后会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件，一个是Fastfile文件(如果要上传AppStore的话还有Deliverfile文件)。Appfile保存苹果开发者的相关信息、项目的相关信息等。Fastfile是运行脚本。</p>
+<p>2.编辑Fastfile文件<br>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
+<p>(1)修改项目工程配置<br>修改Build Settings中的Versioning配置，Current Project Version随便填一个，Versioning System选择Apple Generic。</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/versioning.png" alt=""></p>
+<p>修改Info.plist File路径</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/infoplist.png" alt=""></p>
+<p>(2)定义一个递增build号的函数，添加到Fastfile中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">def updateProjectBuildNumber</div><div class="line"></div><div class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</div><div class="line">build = get_build_number()</div><div class="line">if build.include?&quot;#&#123;currentTime&#125;.&quot;</div><div class="line"># =&gt; 为当天版本 计算迭代版本号</div><div class="line">lastStr = build[build.length-2..build.length-1]</div><div class="line">lastNum = lastStr.to_i</div><div class="line">lastNum = lastNum + 1</div><div class="line">lastStr = lastNum.to_s</div><div class="line">if lastNum &lt; 10</div><div class="line">lastStr = lastStr.insert(0,&quot;0&quot;)</div><div class="line">end</div><div class="line">build = &quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</div><div class="line">else</div><div class="line"># =&gt; 非当天版本 build 号重置</div><div class="line">build = &quot;#&#123;currentTime&#125;.01&quot;</div><div class="line">end</div><div class="line">puts(&quot;*************| 更新build #&#123;build&#125; |*************&quot;)</div><div class="line"># =&gt; 更改项目 build 号</div><div class="line">increment_build_number(</div><div class="line">build_number: &quot;#&#123;build&#125;&quot;</div><div class="line">)</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>实现自动打包的完整Fastfile如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"># 定义fastlane版本号</div><div class="line">fastlane_version “2.46.1” </div><div class="line"></div><div class="line"># 定义打包平台</div><div class="line">default_platform :ios</div><div class="line"></div><div class="line">def updateProjectBuildNumber</div><div class="line"></div><div class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</div><div class="line">build = get_build_number()</div><div class="line">if build.include?&quot;#&#123;currentTime&#125;.&quot;</div><div class="line"># =&gt; 为当天版本 计算迭代版本号</div><div class="line">lastStr = build[build.length-2..build.length-1]</div><div class="line">lastNum = lastStr.to_i</div><div class="line">lastNum = lastNum + 1</div><div class="line">lastStr = lastNum.to_s</div><div class="line">if lastNum &lt; 10</div><div class="line">lastStr = lastStr.insert(0,&quot;0&quot;)</div><div class="line">end</div><div class="line">build = &quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</div><div class="line">else</div><div class="line"># =&gt; 非当天版本 build 号重置</div><div class="line">build = &quot;#&#123;currentTime&#125;.01&quot;</div><div class="line">end</div><div class="line">puts(&quot;*************| 更新build #&#123;build&#125; |*************&quot;)</div><div class="line"># =&gt; 更改项目 build 号</div><div class="line">increment_build_number(</div><div class="line">build_number: &quot;#&#123;build&#125;&quot;</div><div class="line">)</div><div class="line">end</div><div class="line"></div><div class="line">#指定项目的scheme名称</div><div class="line">scheme=“TestCI”</div><div class="line">#蒲公英api_key和user_key</div><div class="line">api_key=“”</div><div class="line">user_key=“”</div><div class="line"></div><div class="line"># 任务脚本</div><div class="line">platform :ios do</div><div class="line">lane :development_build do|options|</div><div class="line">branch = options[:branch]</div><div class="line"></div><div class="line">puts “开始打development ipa”</div><div class="line"></div><div class="line">updateProjectBuildNumber #更改项目build号</div><div class="line"></div><div class="line"># 开始打包</div><div class="line">gym(</div><div class="line">#输出的ipa名称</div><div class="line">output_name:”#&#123;scheme&#125;_#&#123;get_build_number()&#125;”,</div><div class="line"># 是否清空以前的编译信息 true：是</div><div class="line">clean:true,</div><div class="line"># 指定打包方式，Release 或者 Debug</div><div class="line">configuration:&quot;Release&quot;,</div><div class="line"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</div><div class="line">export_method:&quot;development&quot;,</div><div class="line"># 指定输出文件夹</div><div class="line">output_directory:&quot;./fastlane/build&quot;,</div><div class="line">)</div><div class="line"></div><div class="line">puts &quot;开始上传蒲公英&quot;</div><div class="line"># 开始上传蒲公英</div><div class="line">pgyer(api_key: “#&#123;api_key&#125;”, user_key: “#&#123;user_key&#125;”)</div><div class="line"></div><div class="line">end</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</p>
+<p>在终端输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fastlane development_build</div></pre></td></tr></table></figure>
+<p>便会进行自动打包并上传蒲公英了。</p>
+<h4 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h4><p>Jenkins 是一个开源项目，提供了一种易于使用的持续集成系统，使开发者从繁杂的集成中解脱出来，专注于更为重要的业务逻辑实现上。同时 Jenkins 能实施监控集成中存在的错误，提供详细的日志文件和提醒功能，还能用图表的形式形象地展示项目构建的趋势和稳定性。</p>
+<p>安装过程如下：<br>1.点击 <a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war" target="_blank" rel="external">http://mirrors.jenkins.io/war-stable/latest/jenkins.war</a> 下载最新的Jenkins.war</p>
+<p>2.打开终端，进入war包所在目录，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar jenkins.war</div></pre></td></tr></table></figure>
+<p>注意：Jenkins依赖于Java运行环境，因此需要首先安装JDK,下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>3.执行完成之后打开浏览器输入<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></p>
+<p>4.弹出Jenkins安装界面，会让你输入安全密码,输入完成之后选择默认安装。</p>
+<p>5.新建管理员账号密码</p>
+<p>对以上过程有疑问的话可以参考<a href="http://www.jianshu.com/p/41ecb06ae95f" target="_blank" rel="external">手把手教你利用Jenkins持续集成iOS项目</a></p>
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p>还是登录<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a> ，选择系统管理 - 管理插件。</p>
+<p>安装GitLab插件<br>在可选插件中选择GitLab Plugin和Gitlab Hook Plugin进行安装。</p>
+<p>安装Xcode插件<br>在可选插件中选择Xcode integration进行安装。</p>
+<p>安装完成之后，我们就可以配置构建项目了。</p>
+<h4 id="构建任务"><a href="#构建任务" class="headerlink" title="构建任务"></a>构建任务</h4><p>1.点击新建，输入名称，构建一个自由风格的软件项目</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/newtask.png" alt=""></p>
+<p>2.配置Git</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/gitconfig.png" alt=""></p>
+<p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
+<p>如果是HTTP</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/HTTPConfig.png" alt=""></p>
+<p>如果是SSH</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/SSHConfig.png" alt=""></p>
+<p>注意：UserName是取一个名字，填写的Key是私钥。</p>
+<p>3.配置脚本</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/Shell-Config.png" alt=""></p>
+<p>因为我的Git仓库的目录是这样的</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/Git-Index.png" alt=""></p>
+<p>所以在执行fastlane development_build之前需要进入TestCI目录，即fastlane文件夹所在目录。</p>
+<p>4.添加完成之后点击立即构建</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/build-now.png" alt=""></p>
+<p>5.执行成功显示如下</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/upload-Success.png" alt=""></p>
+<p>可以点击进入查看控制台输出</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/console-Output.png" alt=""></p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ul>
+<li><a href="http://www.jianshu.com/p/dac1ce3d7de8" target="_blank" rel="external">http://www.jianshu.com/p/dac1ce3d7de8</a></li>
+<li><a href="http://www.jianshu.com/p/7b3f9cacc2ba" target="_blank" rel="external">http://www.jianshu.com/p/7b3f9cacc2ba</a></li>
+<li><a href="https://www.pgyer.com/doc/view/fastlane" target="_blank" rel="external">https://www.pgyer.com/doc/view/fastlane</a></li>
+<li><a href="http://www.jianshu.com/p/41ecb06ae95f" target="_blank" rel="external">http://www.jianshu.com/p/41ecb06ae95f</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/14/CI/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-why-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -456,6 +618,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Blog</a>
