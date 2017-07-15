@@ -22,9 +22,10 @@
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/SSHConfig.png">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/Shell-Config.png">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/Git-Index.png">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/build-now.png">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/upload-Success.png">
 <meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/console-Output.png">
-<meta property="og:updated_time" content="2017-07-15T14:04:51.000Z">
+<meta property="og:updated_time" content="2017-07-15T14:18:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）">
 <meta name="twitter:description" content="前言在项目测试阶段，频繁的打包发布会耗费团队很多的时间。搭建一个自动化打包发布的平台，可以将我们从那些繁琐的打包发布流程中解放出来。 本文采用的方案是：Jenkins + Fastlane + GitLab + 蒲公英。 Fastlane安装Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。 安装过程如下：1.检查Ruby版">
@@ -253,7 +254,9 @@
 <p>因为我的Git仓库的目录是这样的</p>
 <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/Git-Index.png" alt=""></p>
 <p>所以在执行fastlane development_build之前需要进入TestCI目录，即fastlane文件夹所在目录。</p>
-<p>4.执行成功显示如下</p>
+<p>4.添加完成之后点击立即构建</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/build-now.png" alt=""></p>
+<p>5.执行成功显示如下</p>
 <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/upload-Success.png" alt=""></p>
 <p>可以点击进入查看控制台输出</p>
 <p><img src="http://oszbsqby8.bkt.clouddn.com/blog/console-Output.png" alt=""></p>
