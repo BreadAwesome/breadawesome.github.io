@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//breadawesome.me">
-  <title>Archives: 2017 | BreadAwesome的博客</title>
+  <title>LeetCode Day1 - Two Sum | BreadAwesome的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BreadAwesome的博客">
-<meta property="og:url" content="//breadawesome.me/archives/2017/index.html">
+  <meta name="description" content="一、前言LeetCode也支持Swift了，离职在家，闲来无事，便想着刷几道玩玩，既可以学习一下算法，又可以保持自己的编程状态。 二、ProblemTwo Sum Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Day1 - Two Sum">
+<meta property="og:url" content="//breadawesome.me/2017/08/09/leetcode-day1/index.html">
 <meta property="og:site_name" content="BreadAwesome的博客">
+<meta property="og:description" content="一、前言LeetCode也支持Swift了，离职在家，闲来无事，便想着刷几道玩玩，既可以学习一下算法，又可以保持自己的编程状态。 二、ProblemTwo Sum Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assu">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/dayone_timelimitexceeded.png">
+<meta property="og:updated_time" content="2017-08-09T09:39:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BreadAwesome的博客">
+<meta name="twitter:title" content="LeetCode Day1 - Two Sum">
+<meta name="twitter:description" content="一、前言LeetCode也支持Swift了，离职在家，闲来无事，便想着刷几道玩玩，既可以学习一下算法，又可以保持自己的编程状态。 二、ProblemTwo Sum Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assu">
+<meta name="twitter:image" content="http://oszbsqby8.bkt.clouddn.com/blog/dayone_timelimitexceeded.png">
   
     <link rel="alternative" href="/atom.xml" title="BreadAwesome的博客" type="application/atom+xml">
   
@@ -145,175 +151,158 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-leetcode-day1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      LeetCode Day1 - Two Sum
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/leetcode-day1/" class="archive-article-date">
+
+        
+        <a href="/2017/08/09/leetcode-day1/" class="archive-article-date">
   	<time datetime="2017-08-09T07:08:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/leetcode-day1/">LeetCode Day1 - Two Sum</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>LeetCode也支持Swift了，离职在家，闲来无事，便想着刷几道玩玩，既可以学习一下算法，又可以保持自己的编程状态。</p>
+<h4 id="二、Problem"><a href="#二、Problem" class="headerlink" title="二、Problem"></a>二、Problem</h4><p><strong>Two Sum</strong></p>
+<p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have <strong>exactly</strong> one solution, and you may not use the same element twice.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Given nums = [2, 7, 11, 15], target = 9,</div><div class="line"></div><div class="line">Because nums[0] + nums[1] = 2 + 7 = 9,</div><div class="line">return [0, 1].</div></pre></td></tr></table></figure>
+<p>问题的意思是给一个整数数组，再给一个目标值，找出数组中相加等于目标值的两个数，然后将它们的索引作为一个新的数组返回。这里假设只有一个解决方案，也就是说不存在会有两组数相加等于目标值。</p>
+<h4 id="三、Solution"><a href="#三、Solution" class="headerlink" title="三、Solution"></a>三、Solution</h4><p>开始我的思路是这样的：</p>
+<ol>
+<li>判断数组的count是否小于2，如果小于2则直接返回一个空数组</li>
+<li>这里假设数组参数名为nums,设定两个变量start和end，start初始为0,end为nums.cout - 2，当strat &lt;= end的时候进行循环，nums[start]分别尝试与nums[start + 1]…nums[nums.count - 1]相加，如果等于目标值，则返回对应的索引数组，如果不等于目标值则继续循环，每次循环完成后将start值加1。</li>
+<li>遍历完成之后仍没有结果的话则返回一个空数组</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</div><div class="line">        </div><div class="line">        if nums.count &lt; 2 &#123;</div><div class="line">            return [Int]()</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        var start = 0</div><div class="line">        let end = nums.count - 2</div><div class="line">        </div><div class="line">        while start &lt;= end &#123;</div><div class="line">            let firstNum = nums[start]</div><div class="line">            </div><div class="line">            for (index, secondNum) in nums[(start + 1)..&lt;nums.count].enumerated() &#123;</div><div class="line">                </div><div class="line">                if firstNum + secondNum == target &#123;</div><div class="line">                    return [start, start + 1 + index]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            start += 1</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return [Int]()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>提交之后</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/dayone_timelimitexceeded.png" alt=""></p>
+<p>发现有一个case超时了，确实当数组数量很多的时候需要遍历很多次，这样会花费很多的时间。</p>
+<p>数组就不贴出来了，我只知道当我复制进去的时候连Xcode都为之一卡。</p>
+<p>那么有什么好的办法可以减少时间耗费呢？</p>
+<p>我去看了下这个问题的Discuss，发现了一种很好的思路，那就是使用字典。只需遍历一次，将遍历得到的(index, value)的value作为键，index作为值，然后每次查找时判断目标值 - value这个键在字典中是否存在即可。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    func twoSum(_ nums: [Int], _ target: Int) -&gt; [Int] &#123;</div><div class="line">        var map = [Int: Int]()</div><div class="line">        var resultArray = [Int]()</div><div class="line">        </div><div class="line">        for (index, value) in nums.enumerated() &#123;</div><div class="line">            </div><div class="line">            if let firstIndex = map[target - value] &#123;</div><div class="line">                resultArray.append(firstIndex)</div><div class="line">                resultArray.append(index)</div><div class="line">                break</div><div class="line">            &#125;else &#123;</div><div class="line">                map[value] = index</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return resultArray</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不得不说思路的转变节省了大量的时间，程序员也要学习算法啊。</p>
+<p>我在GitHub上新建了一个仓库，作为我刷题的记录，大家有兴趣的话也可以去看看。</p>
+<p>GitHub地址：<a href="https://github.com/BreadAwesome/LeetCode-Swift" target="_blank" rel="external">https://github.com/BreadAwesome/LeetCode-Swift</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://breadawesome.me/2017/08/09/leetcode-day1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/CI/" class="archive-article-date">
-  	<time datetime="2017-07-14T08:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/14/CI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/CI/">iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/why-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/why-blog/">我为什么要写博客？</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/hexo-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:14:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/hexo-blog/">Mac下使用Hexo+Github搭建个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Blog</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -336,8 +325,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
