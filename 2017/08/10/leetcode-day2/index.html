@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//breadawesome.me">
-  <title>Archives | BreadAwesome的博客</title>
+  <title>LeetCode Day1 - Two Sum | BreadAwesome的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BreadAwesome的博客">
-<meta property="og:url" content="//breadawesome.me/archives/index.html">
+  <meta name="description" content="一、前言又是阳光灿烂的一天，那就废话不多说，开始今天的刷题。 二、Problem Add Two NumbersYou are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Day1 - Two Sum">
+<meta property="og:url" content="//breadawesome.me/2017/08/10/leetcode-day2/index.html">
 <meta property="og:site_name" content="BreadAwesome的博客">
+<meta property="og:description" content="一、前言又是阳光灿烂的一天，那就废话不多说，开始今天的刷题。 二、Problem Add Two NumbersYou are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/day2_wrongerror.png">
+<meta property="og:updated_time" content="2017-08-10T04:46:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BreadAwesome的博客">
+<meta name="twitter:title" content="LeetCode Day1 - Two Sum">
+<meta name="twitter:description" content="一、前言又是阳光灿烂的一天，那就废话不多说，开始今天的刷题。 二、Problem Add Two NumbersYou are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes">
+<meta name="twitter:image" content="http://oszbsqby8.bkt.clouddn.com/blog/day2_wrongerror.png">
   
     <link rel="alternative" href="/atom.xml" title="BreadAwesome的博客" type="application/atom+xml">
   
@@ -145,36 +152,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-leetcode-day2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      LeetCode Day1 - Two Sum
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/10/leetcode-day2/" class="archive-article-date">
+
+        
+        <a href="/2017/08/10/leetcode-day2/" class="archive-article-date">
   	<time datetime="2017-08-10T04:22:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/10/leetcode-day2/">LeetCode Day1 - Two Sum</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>又是阳光灿烂的一天，那就废话不多说，开始今天的刷题。</p>
+<h4 id="二、Problem"><a href="#二、Problem" class="headerlink" title="二、Problem"></a>二、Problem</h4><p> <strong>Add Two Numbers</strong><br>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p><strong>Input</strong>: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br><strong>Output</strong>: 7 -&gt; 0 -&gt; 8</p>
+<p>问题的意思也很浅显易懂，给两个链表，计算它们相加之后的值。</p>
+<h4 id="三、Solution"><a href="#三、Solution" class="headerlink" title="三、Solution"></a>三、Solution</h4><p>思路的话也蛮简单的，链表的每一个节点分别相加，将进位传到下一个节点。如果两个链表长度不一样，则给短的补零，使它们长度一样。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">//Definition for singly-linked list.</div><div class="line">public class ListNode &#123;</div><div class="line">      public var val: Int</div><div class="line">      public var next: ListNode?</div><div class="line">      public init(_ val: Int) &#123;</div><div class="line">          self.val = val</div><div class="line">          self.next = nil</div><div class="line">      &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Solution &#123;</div><div class="line">    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -&gt; ListNode? &#123;</div><div class="line">        var carry = 0</div><div class="line">        var list1 = l1</div><div class="line">        var list2 = l2</div><div class="line">        var list3: ListNode? = ListNode(0)</div><div class="line">        var node = list3</div><div class="line">        </div><div class="line">        while list1 != nil || list2 != nil &#123;</div><div class="line">            let list1Vaule = list1?.val != nil ? list1!.val : 0</div><div class="line">            let list2Vaule = list2?.val != nil ? list2!.val : 0</div><div class="line">            </div><div class="line">            node?.next = ListNode((list1Vaule + list2Vaule + carry) % 10)</div><div class="line">            node = node?.next</div><div class="line">            carry = (list1Vaule + list2Vaule + carry) / 10</div><div class="line">            list1 = list1?.next</div><div class="line">            list2 = list2?.next</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if (carry &gt; 0) &#123;</div><div class="line">            node?.next = ListNode(carry)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        list3 = list3?.next</div><div class="line">        </div><div class="line">        return list3</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>开始我没有考虑到最后一次进位的情况，也就是以下代码没写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (carry &gt; 0) &#123;</div><div class="line">    node?.next = ListNode(carry)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后提交之后，LeetCode报了一个Wrong Answer的错<br><img src="http://oszbsqby8.bkt.clouddn.com/blog/day2_wrongerror.png" alt=""></p>
+<p>可以说是非常人性了。但在平时自己写代码的过程中我们还是要尽可能多的考虑情况，毕竟那时候没人会提醒你了。话说我觉得这个算法可以用来解决两个超大数的相加，你觉得呢？</p>
+<p>惯例放上GitHub地址：<a href="https://github.com/BreadAwesome/LeetCode-Swift" target="_blank" rel="external">https://github.com/BreadAwesome/LeetCode-Swift</a></p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,183 +204,104 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://breadawesome.me/2017/08/10/leetcode-day2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/leetcode-day1/" class="archive-article-date">
-  	<time datetime="2017-08-09T07:08:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/09/leetcode-day1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode Day1 - Two Sum</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/leetcode-day1/">LeetCode Day1 - Two Sum</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/CI/" class="archive-article-date">
-  	<time datetime="2017-07-14T08:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/CI/">iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/why-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/why-blog/">我为什么要写博客？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/hexo-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:14:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/hexo-blog/">Mac下使用Hexo+Github搭建个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Blog</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -385,8 +324,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
