@@ -147,6 +147,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-day3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/14/leetcode-day3/">LeetCode Day3 - Reverse Integer</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/14/leetcode-day3/" class="archive-article-date">
+  	<time datetime="2017-08-14T12:50:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>找工作这段闹心的日子，继续刷题吧…</p>
+<h4 id="二、Problem"><a href="#二、Problem" class="headerlink" title="二、Problem"></a>二、Problem</h4><p><strong>Reverse Integer</strong></p>
+<p>Reverse digits of an integer.</p>
+<p><strong>Example1:</strong> x = 123, return 321<br><strong>Example2:</strong> x = -123, return -321</p>
+<p><strong>Note:</strong><br>The input is assumed to be a 32-bit signed integer. Your function should <strong>return 0 when the reversed integer overflows.</strong></p>
+<p>问题的意思是给一个整数，进行反转后再返回。如果反转后溢出了，则返回0。</p>
+<h4 id="三、Solution"><a href="#三、Solution" class="headerlink" title="三、Solution"></a>三、Solution</h4><p>思路是将输入的整数转化为字符串，遍历该字符串的<code>characters.reversed()</code>,创建一个新字符串，如果遇到“-”号则插入到该字符串最前面，否则就插入到该字符串后面。最后使用可选绑定判断是否溢出，进行相应的返回。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    func reverse(_ x: Int) -&gt; Int &#123;</div><div class="line">        let oldString = String(x)</div><div class="line">        var newString = String()</div><div class="line">        </div><div class="line">        for character in oldString.characters.reversed() &#123;</div><div class="line">            if character == &quot;-&quot; &#123;</div><div class="line">                newString.insert(character, at: newString.startIndex)</div><div class="line">            &#125;else &#123;</div><div class="line">                newString.append(character)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        if let result = Int32(newString) &#123;</div><div class="line">            return Int(result)</div><div class="line">        &#125;else &#123;</div><div class="line">            return 0</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/14/leetcode-day3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-day2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
