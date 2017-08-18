@@ -147,6 +147,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ktattributedstring" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/17/ktattributedstring/">当NSAttributedString遇上链式编程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/17/ktattributedstring/" class="archive-article-date">
+  	<time datetime="2017-08-17T12:43:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>NSAttributedString是一种带有属性的字符串，通过它我们可以在一个字符串中实现不同的字体大小、字体颜色、删除线等功能。</p>
+<p>可是它的使用经常是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDictionary *attributeDic = [NSDictionary dictionaryWithObjectsAndKeys:</div><div class="line">                                   [UIFont systemFontOfSize:15.0],NSFontAttributeName,</div><div class="line">                                   [UIColor redColor],NSForegroundColorAttributeName,</div><div class="line">                                   @(NSUnderlineStyleSingle),NSUnderlineStyleAttributeName,nil];</div><div class="line">                                   </div><div class="line">NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@&quot;Hello world&quot; attributes:attributeDic];</div></pre></td></tr></table></figure>
+<p>又或者是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@&quot;Hello world&quot;];</div><div class="line"></div><div class="line">[attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15.0] range:NSMakeRange(0, attributedString.length)];</div><div class="line"></div><div class="line">[attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, attributedString.length)];</div><div class="line"></div><div class="line">[attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:NSMakeRange(0, attributedString.length)];</div></pre></td></tr></table></figure>
+<p>当一个字符串拥有多种样式的时候，更是苦不堪言。</p>
+<p>那么是否有什么优雅的方式可以解决这个问题呢？</p>
+<h4 id="Masonry与AutoLayout"><a href="#Masonry与AutoLayout" class="headerlink" title="Masonry与AutoLayout"></a>Masonry与AutoLayout</h4><p>Masonry是一个对系统NSLayoutConstraint进行封装的第三方自动布局框架，采用链式编程的方式提供给开发者API。</p>
+<p>在使用Masonry之前我们的代码通常是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">UIView *superview = self.view;</div><div class="line"></div><div class="line">UIView *view1 = [[UIView alloc] init];</div><div class="line">view1.translatesAutoresizingMaskIntoConstraints = NO;</div><div class="line">view1.backgroundColor = [UIColor greenColor];</div><div class="line">[superview addSubview:view1];</div><div class="line"></div><div class="line">UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);</div><div class="line"></div><div class="line">[superview addConstraints:@[</div><div class="line"></div><div class="line">    //view1 constraints</div><div class="line">    [NSLayoutConstraint constraintWithItem:view1</div><div class="line">                                 attribute:NSLayoutAttributeTop</div><div class="line">                                 relatedBy:NSLayoutRelationEqual</div><div class="line">                                    toItem:superview</div><div class="line">                                 attribute:NSLayoutAttributeTop</div><div class="line">                                multiplier:1.0</div><div class="line">                                  constant:padding.top],</div><div class="line"></div><div class="line">    [NSLayoutConstraint constraintWithItem:view1</div><div class="line">                                 attribute:NSLayoutAttributeLeft</div><div class="line">                                 relatedBy:NSLayoutRelationEqual</div><div class="line">                                    toItem:superview</div><div class="line">                                 attribute:NSLayoutAttributeLeft</div><div class="line">                                multiplier:1.0</div><div class="line">                                  constant:padding.left],</div><div class="line"></div><div class="line">    [NSLayoutConstraint constraintWithItem:view1</div><div class="line">                                 attribute:NSLayoutAttributeBottom</div><div class="line">                                 relatedBy:NSLayoutRelationEqual</div><div class="line">                                    toItem:superview</div><div class="line">                                 attribute:NSLayoutAttributeBottom</div><div class="line">                                multiplier:1.0</div><div class="line">                                  constant:-padding.bottom],</div><div class="line"></div><div class="line">    [NSLayoutConstraint constraintWithItem:view1</div><div class="line">                                 attribute:NSLayoutAttributeRight</div><div class="line">                                 relatedBy:NSLayoutRelationEqual</div><div class="line">                                    toItem:superview</div><div class="line">                                 attribute:NSLayoutAttributeRight</div><div class="line">                                multiplier:1</div><div class="line">                                  constant:-padding.right],</div><div class="line"></div><div class="line"> ]];</div></pre></td></tr></table></figure>
+<p>当使用Masonry之后我们的代码是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[view1 mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.edges.equalTo(superview).with.insets(padding);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>AutoLayout的代码书写无疑比NSAttributedString的还复杂的多，但经过Masonry的封装之后，我们使用起来可方便多了，感谢Masonry。</p>
+<p>那么我们是否也能使用Masonry链式编程的思想来封装NSAttributedString呢?</p>
+<h4 id="链式编程分析"><a href="#链式编程分析" class="headerlink" title="链式编程分析"></a>链式编程分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make.edges.equalTo(superview).with.insets(padding);</div></pre></td></tr></table></figure>
+<p>分析以上代码</p>
+<ol>
+<li>用点语法的形式调用可以得出调用的应该是一个属性</li>
+<li>调完一次之后能够接着继续调用可以得出应该是在每次调用之后返回了实例本身</li>
+<li>能在括号里传参数，且有返回值，可以进一步得出这个属性是一个block</li>
+</ol>
+<h4 id="NSAttributedString链式编程实现"><a href="#NSAttributedString链式编程实现" class="headerlink" title="NSAttributedString链式编程实现"></a>NSAttributedString链式编程实现</h4><p>这里以一个color属性为例。</p>
+<p>1.给NSMutableAttributedString创建分类，之所以是NSMutableAttributedString而不是NSAttributedString，是因为NSAttributedString是不可变的，不方便进行属性添加操作</p>
+<p>2.创建color的block</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (NSMutableAttributedString *(^)(UIColor *))color;</div></pre></td></tr></table></figure>
+<p>3.color的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (NSMutableAttributedString *(^)(UIColor *))color &#123;</div><div class="line">    return ^(UIColor *color) &#123;</div><div class="line">        [self addAttributeName:NSForegroundColorAttributeName value:color];</div><div class="line">        return self;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>经过以上几步我们便能对一个NSMutableAttributedString的对象进行<code>.color([UIColor redColor])</code>的操作了。其它属性的封装同理。</p>
+<h4 id="一个关于删除线的Bug"><a href="#一个关于删除线的Bug" class="headerlink" title="一个关于删除线的Bug"></a>一个关于删除线的Bug</h4><p>当我封装完成进行测试时，突然发现有时候设置删除线无效，即设置NSStrikethroughStyleAttributeName的时候，该情况发生在iOS10.3。</p>
+<p>我在StackOverflow上搜了一下，发现很多人也遇到了这个问题，应该是iOS10.3的一个bug，具体出现的场景还不太清楚，如果有人知道的话可以和我讨论下。</p>
+<p>解决方法是同时添加NSBaselineOffsetAttributeName属性。</p>
+<p>我最后封装的效果图如下：</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/demo.png" alt=""></p>
+<p><a href="https://github.com/BreadAwesome/KTAttributedString" target="_blank" rel="external">GitHub地址</a></p>
+<p>如果觉得对您有帮助的话请给我一个Star，如果有bug的话可以给我提Issues，我会尽快解决。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">https://github.com/SnapKit/Masonry</a></li>
+<li><a href="https://github.com/Draveness/Typeset" target="_blank" rel="external">https://github.com/Draveness/Typeset</a></li>
+<li><a href="http://www.jianshu.com/p/0bf1a7052d25" target="_blank" rel="external">http://www.jianshu.com/p/0bf1a7052d25</a></li>
+<li><a href="https://stackoverflow.com/questions/43070335/nsstrikethroughstyleattributename-how-to-strike-out-the-string-in-ios-10-3" target="_blank" rel="external">https://stackoverflow.com/questions/43070335/nsstrikethroughstyleattributename-how-to-strike-out-the-string-in-ios-10-3</a></li>
+<li><a href="https://stackoverflow.com/questions/25956183/nsmutableattributedstrings-attribute-nsstrikethroughstyleattributename-doesnt" target="_blank" rel="external">https://stackoverflow.com/questions/25956183/nsmutableattributedstrings-attribute-nsstrikethroughstyleattributename-doesnt</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/17/ktattributedstring/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-day3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -887,10 +1002,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
@@ -908,6 +1019,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
