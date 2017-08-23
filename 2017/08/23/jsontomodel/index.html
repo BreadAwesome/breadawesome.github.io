@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//breadawesome.me">
-  <title>Archives | BreadAwesome的博客</title>
+  <title>一键生成model（支持MJExtension） | BreadAwesome的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BreadAwesome的博客">
-<meta property="og:url" content="//breadawesome.me/archives/index.html">
+  <meta name="description" content="在日常iOS开发中，将网络请求获取到的JSON数据转化为对应的模型，是我们经常会做的事情。也涌现了不少优秀的第三方开源库，比如说MJExtension、JSONModel、YYModel等。 这些库的出现给我们带来了极大的方便，然而对应的model类还是需要我们手动进行创建。当一个model类中拥有成吨的属性时….  懒惰是人类文明进步的真正动力  既然我们要创建的model类都是十分相似，只有里">
+<meta name="keywords" content="iOS,JSON,Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一键生成model（支持MJExtension）">
+<meta property="og:url" content="//breadawesome.me/2017/08/23/jsontomodel/index.html">
 <meta property="og:site_name" content="BreadAwesome的博客">
+<meta property="og:description" content="在日常iOS开发中，将网络请求获取到的JSON数据转化为对应的模型，是我们经常会做的事情。也涌现了不少优秀的第三方开源库，比如说MJExtension、JSONModel、YYModel等。 这些库的出现给我们带来了极大的方便，然而对应的model类还是需要我们手动进行创建。当一个model类中拥有成吨的属性时….  懒惰是人类文明进步的真正动力  既然我们要创建的model类都是十分相似，只有里">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/jsondemo.png">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/hfile.png">
+<meta property="og:image" content="http://oszbsqby8.bkt.clouddn.com/blog/mfile.png">
+<meta property="og:updated_time" content="2017-08-23T05:20:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BreadAwesome的博客">
+<meta name="twitter:title" content="一键生成model（支持MJExtension）">
+<meta name="twitter:description" content="在日常iOS开发中，将网络请求获取到的JSON数据转化为对应的模型，是我们经常会做的事情。也涌现了不少优秀的第三方开源库，比如说MJExtension、JSONModel、YYModel等。 这些库的出现给我们带来了极大的方便，然而对应的model类还是需要我们手动进行创建。当一个model类中拥有成吨的属性时….  懒惰是人类文明进步的真正动力  既然我们要创建的model类都是十分相似，只有里">
+<meta name="twitter:image" content="http://oszbsqby8.bkt.clouddn.com/blog/jsondemo.png">
   
     <link rel="alternative" href="/atom.xml" title="BreadAwesome的博客" type="application/atom+xml">
   
@@ -145,36 +154,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-jsontomodel" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/23/jsontomodel/" class="archive-article-date">
-  	<time datetime="2017-08-23T04:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/23/jsontomodel/">一键生成model（支持MJExtension）</a>
+    <h1 class="article-title" itemprop="name">
+      一键生成model（支持MJExtension）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/23/jsontomodel/" class="archive-article-date">
+  	<time datetime="2017-08-23T04:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常iOS开发中，将网络请求获取到的JSON数据转化为对应的模型，是我们经常会做的事情。也涌现了不少优秀的第三方开源库，比如说MJExtension、JSONModel、YYModel等。</p>
+<p>这些库的出现给我们带来了极大的方便，然而对应的model类还是需要我们手动进行创建。当一个model类中拥有成吨的属性时….</p>
+<blockquote>
+<p>懒惰是人类文明进步的真正动力</p>
+</blockquote>
+<p>既然我们要创建的model类都是十分相似，只有里面的属性不同，那么为什么不进行自动化呢？</p>
+<p>我花了点时间制作了一个Mac小工具，可以快速地把JSON数据转换生成对应model类，目前只支持MJExtension，以后如果有需要的话将会支持更多库。</p>
+<p>使用效果图如下：</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/jsondemo.png" width="635" height="428" alt="使用界面" align="center"></p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/hfile.png" width="405" height="244" alt="生成的.h文件" align="center"></p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/mfile.png" width="416" height="172" alt="生成的.m文件" align="center"></p>
+<p><a href="https://github.com/BreadAwesome/JsonToModelConverter" target="_blank" rel="external">GitHub地址</a></p>
+<p>如果觉得好用的话请给我一个Star，如果有什么问题的话可以Issues我！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,297 +214,104 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://breadawesome.me/2017/08/23/jsontomodel/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/17/ktattributedstring/" class="archive-article-date">
-  	<time datetime="2017-08-17T12:43:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/17/ktattributedstring/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">当NSAttributedString遇上链式编程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/17/ktattributedstring/">当NSAttributedString遇上链式编程</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/14/leetcode-day3/" class="archive-article-date">
-  	<time datetime="2017-08-14T12:50:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/14/leetcode-day3/">LeetCode Day3 - Reverse Integer</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/10/leetcode-day2/" class="archive-article-date">
-  	<time datetime="2017-08-10T04:22:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/10/leetcode-day2/">LeetCode Day2 - Add Two Numbers</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/leetcode-day1/" class="archive-article-date">
-  	<time datetime="2017-08-09T07:08:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/leetcode-day1/">LeetCode Day1 - Two Sum</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/CI/" class="archive-article-date">
-  	<time datetime="2017-07-14T08:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/CI/">iOS自动化打包发布（Jenkins + Fastlane + GitLab + 蒲公英）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/why-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/why-blog/">我为什么要写博客？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/hexo-blog/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:14:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/hexo-blog/">Mac下使用Hexo+Github搭建个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Blog</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -507,8 +334,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

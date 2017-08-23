@@ -147,6 +147,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-jsontomodel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/23/jsontomodel/">一键生成model（支持MJExtension）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/23/jsontomodel/" class="archive-article-date">
+  	<time datetime="2017-08-23T04:30:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在日常iOS开发中，将网络请求获取到的JSON数据转化为对应的模型，是我们经常会做的事情。也涌现了不少优秀的第三方开源库，比如说MJExtension、JSONModel、YYModel等。</p>
+<p>这些库的出现给我们带来了极大的方便，然而对应的model类还是需要我们手动进行创建。当一个model类中拥有成吨的属性时….</p>
+<blockquote>
+<p>懒惰是人类文明进步的真正动力</p>
+</blockquote>
+<p>既然我们要创建的model类都是十分相似，只有里面的属性不同，那么为什么不进行自动化呢？</p>
+<p>我花了点时间制作了一个Mac小工具，可以快速地把JSON数据转换生成对应model类，目前只支持MJExtension，以后如果有需要的话将会支持更多库。</p>
+<p>使用效果图如下：</p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/jsondemo.png" width="635" height="428" alt="使用界面" align="center"></p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/hfile.png" width="405" height="244" alt="生成的.h文件" align="center"></p>
+<p><img src="http://oszbsqby8.bkt.clouddn.com/blog/mfile.png" width="416" height="172" alt="生成的.m文件" align="center"></p>
+<p><a href="https://github.com/BreadAwesome/JsonToModelConverter" target="_blank" rel="external">GitHub地址</a></p>
+<p>如果觉得好用的话请给我一个Star，如果有什么问题的话可以Issues我！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JSON</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Mac</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/23/jsontomodel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ktattributedstring" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1027,6 +1121,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JSON</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Mac</a>
               </li>
             
             <div class="clearfix"></div>
